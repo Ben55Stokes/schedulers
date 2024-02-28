@@ -1,0 +1,18 @@
+select u.user_id,up.full_name,u.email,up.date_of_birth from user u 
+inner join user_profile up on u.user_id=up.user_id 
+inner join birthdayLogs ljrd on 
+ DAY(up.date_of_birth) = DAY(CURDATE()) AND MONTH(up.date_of_birth) = MONTH(CURDATE()) and Day(ljrd.last_job_run_date)< day(up.date_of_birth)
+ and 	month(ljrd.last_job_run_date)<= month(up.date_of_birth); 
+
+CREATE TABLE birthday_wishes_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_email VARCHAR(255),
+    email_sent_date DATE
+);
+
+drop table log_table;
+
+CREATE TABLE birthdayLogs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    last_job_run_date DATE
+);
